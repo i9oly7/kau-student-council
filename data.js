@@ -12,7 +12,7 @@
    وسائل التواصل التالية هي وسائل عمادة شؤون الطلاب (أمانة المجلس) كما وردت في الدليل.
 */
 const COUNCIL_INFO = {
-     logo: "images/logo.png.png",
+    logo: "images/logo.png.png",
   website: "https://www.kau.edu.sa",
   email: "dsa@kau.sa",
   x: "https://x.com/st_affairs",
@@ -102,7 +102,7 @@ const CATEGORIES = [
 */
 const MEMBERS = [
   { name: "أصيل بن علاء الدين محمد", category: "health",        role: "ممثل الكليات الصحية",                college: "", photo: "images/members/aseel.jpg.png", phone: "", whatsapp: "", email: "" },
-  { name: "سلطانة المنصور", category: "health",        role: "ممثلة الكليات الصحية",               college: "", photo: "", phone: "", whatsapp: "", email: "" },
+  { name: "سلطانة آل مساعد", category: "health",        role: "ممثلة الكليات الصحية",               college: "", photo: "", phone: "", whatsapp: "", email: "" },
   { name: "", category: "engineering",   role: "ممثل الكليات الهندسية والحاسوبية",   college: "", photo: "", phone: "", whatsapp: "", email: "" },
   { name: "", category: "engineering",   role: "ممثلة الكليات الهندسية والحاسوبية",  college: "", photo: "", phone: "", whatsapp: "", email: "" },
   { name: "", category: "science",       role: "ممثل الكليات العلمية",               college: "", photo: "", phone: "", whatsapp: "", email: "" },
