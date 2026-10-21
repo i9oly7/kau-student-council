@@ -102,7 +102,7 @@ const CATEGORIES = [
 */
 const MEMBERS = [
   { name: "أصيل بن علاء الدين محمد", category: "health",        role: "ممثل الكليات الصحية",                college: "", photo: "images/members/aseel.jpg.png", phone: "", whatsapp: "", email: "" },
-  { name: "سلطانة آل مساعد", category: "health",        role: "ممثلة الكليات الصحية",               college: "", photo: "", phone: "", whatsapp: "", email: "" },
+  { name: "سلطانه آل مساعد", category: "health",        role: "ممثلة الكليات الصحية",               college: "", photo: "", phone: "", whatsapp: "", email: "" },
     { name: "زياد الغامدي", category: "engineering",   role: "ممثل الكليات الهندسية والحاسوبية",   college: "", photo: "images/members/ziyad.jpeg", phone: "", whatsapp: "", email: "" },
   { name: "", category: "engineering",   role: "ممثلة الكليات الهندسية والحاسوبية",  college: "", photo: "", phone: "", whatsapp: "", email: "" },
   { name: "", category: "science",       role: "ممثل الكليات العلمية",               college: "", photo: "", phone: "", whatsapp: "", email: "" },
