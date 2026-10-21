@@ -12,7 +12,7 @@
    وسائل التواصل التالية هي وسائل عمادة شؤون الطلاب (أمانة المجلس) كما وردت في الدليل.
 */
 const COUNCIL_INFO = {
-    logo: "images/logo.png",
+     logo: "images/logo.png.png",
   website: "https://www.kau.edu.sa",
   email: "dsa@kau.sa",
   x: "https://x.com/st_affairs",
