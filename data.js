@@ -12,7 +12,7 @@
    وسائل التواصل التالية هي وسائل عمادة شؤون الطلاب (أمانة المجلس) كما وردت في الدليل.
 */
 const COUNCIL_INFO = {
-    logo: "images/logo.png.png",
+    logo: "images/logo.png",
   website: "https://www.kau.edu.sa",
   email: "dsa@kau.sa",
   x: "https://x.com/st_affairs",
@@ -132,30 +132,12 @@ const MEMBERS = [
 */
 const SURVEYS = [
   {
-    id: "student-challenges",
-    title: "استبيان التحديات الطلابية (مثال)",
-    description: "شاركنا أبرز التحديات التي تواجهك في الخدمات أو الأنظمة الأكاديمية لرفعها إلى الجهات المعنية.",
-    audience: "جميع الطلاب والطالبات",
+    id: "health-colleges-suggestions",
+    title: "حصر المقترحات لتطوير تجربة الطالب بالكليات الصحية",
+    description: "شاركنا مقترحاتك لتطوير تجربتك الجامعية في الكليات الصحية، ليرفعها المجلس إلى الجهات المعنية.",
+    audience: "طلاب وطالبات الكليات الصحية",
     deadline: "",
     status: "open",
-    url: ""
-  },
-  {
-    id: "services-satisfaction",
-    title: "استبيان رضا الطلبة عن الخدمات (مثال)",
-    description: "نقيس من خلاله رضا الطلبة عن جودة الخدمات المقدمة ونجمع مقترحات التحسين.",
-    audience: "طلبة مرحلة البكالوريوس",
-    deadline: "2026-12-31",
-    status: "open",
-    url: ""
-  },
-  {
-    id: "recommendations-feedback",
-    title: "استبيان التغذية الراجعة على التوصيات (مثال)",
-    description: "استبيان سابق لقياس رضا الطلبة عن تنفيذ توصيات المجلس.",
-    audience: "جميع الطلاب والطالبات",
-    deadline: "2026-01-15",
-    status: "closed",
-    url: ""
+    url: "https://forms.gle/bku7W6GW3E3J43WE8"
   }
-]
+];
