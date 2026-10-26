@@ -29,12 +29,12 @@ const COUNCIL_INFO = {
    لإضافة عضو آخر من القيادات: انسخ أحد أسطر "leader" وعدّل المنصب.
 */
 const LEADERSHIP = [
-  { group: "chair",     position: "نائب رئيس الجامعة للشؤون التعليمية",            name: "د. محمد بن رضا كابلي", photo: "images/leaders/kabli.jpg" },
-  { group: "secretary", position: "عميد شؤون الطلاب",                              name: "أ.د. فؤاد بن أحمد ابولبن", photo: "images/leaders/FOuad.jpg" },
-  { group: "leader",    position: "نائب رئيس الجامعة للحياة الجامعية والتشغيل",   name: "د. محمد بن أحمد العمودي", photo: "images/leaders/omody.jpg" },
-  { group: "leader",    position: "عميد عمادة القبول والتسجيل",                    name: "د.جمعان بن صالح الغامدي", photo: "images/leaders/ghamdi.jpg" },
-  { group: "leader",    position: "وكيل عمادة الدراسات العليا",                    name: "د.عبدالوهاب بن مستور السلمي", photo: "" },
-  { group: "leader",    position: "الرئيس التنفيذي للاتصال المؤسسي", name: "د.مصعب بن فالح الحربي", photo: "images/leaders/musab.jpg" }
+  { id: "kabli",  group: "chair",     position: "نائب رئيس الجامعة للشؤون التعليمية",          name: "د. محمد بن رضا كابلي",        photo: "images/leaders/kabli.jpg",  bio: "" },
+  { id: "fouad",  group: "secretary", position: "عميد شؤون الطلاب",                            name: "أ.د. فؤاد بن أحمد ابولبن",     photo: "images/leaders/FOuad.jpg",  bio: "" },
+  { id: "omody",  group: "leader",    position: "نائب رئيس الجامعة للحياة الجامعية والتشغيل", name: "د. محمد بن أحمد العمودي",      photo: "images/leaders/omody.jpg",  bio: "" },
+  { id: "ghamdi", group: "leader",    position: "عميد عمادة القبول والتسجيل",                  name: "د.جمعان بن صالح الغامدي",      photo: "images/leaders/ghamdi.jpg", bio: "" },
+  { id: "sulami", group: "leader",    position: "وكيل عمادة الدراسات العليا",                  name: "د.عبدالوهاب بن مستور السلمي",  photo: "",                          bio: "" },
+  { id: "musab",  group: "leader",    position: "الرئيس التنفيذي للاتصال المؤسسي",             name: "د.مصعب بن فالح الحربي",       photo: "images/leaders/musab.jpg",  bio: "" }
 ];
 /* ---------- فئات التمثيل والكليات التابعة لها ----------
    حسب «توزيع المرشحين والمرشحات حسب الكليات والفروع الأكاديمية» في الدليل.
@@ -101,20 +101,20 @@ const CATEGORIES = [
    ⚠️ لا تنشر أي رقم أو بريد إلا بموافقة العضو.
 */
 const MEMBERS = [
-  { name: "أصيل بن علاء الدين محمد", category: "health",        role: "ممثل الكليات الصحية",                college: "", photo: "images/members/aseel.jpg.png", phone: "", whatsapp: "", email: "" },
-  { name: "سلطانه آل مساعد", category: "health",        role: "ممثلة الكليات الصحية",               college: "", photo: "", phone: "", whatsapp: "", email: "" },
-    { name: "زياد الغامدي", category: "engineering",   role: "ممثل الكليات الهندسية والحاسوبية",   college: "", photo: "images/members/ziyad.jpeg", phone: "", whatsapp: "", email: "" },
-  { name: "", category: "engineering",   role: "ممثلة الكليات الهندسية والحاسوبية",  college: "", photo: "", phone: "", whatsapp: "", email: "" },
-  { name: "", category: "science",       role: "ممثل الكليات العلمية",               college: "", photo: "", phone: "", whatsapp: "", email: "" },
-  { name: "", category: "science",       role: "ممثلة الكليات العلمية",              college: "", photo: "", phone: "", whatsapp: "", email: "" },
-  { name: "بدر العتيبي", category: "humanities",    role: "ممثل الكليات الأدبية",               college: "", photo: "", phone: "", whatsapp: "", email: "" },
-  { name: "عبير المنصوري", category: "humanities",    role: "ممثلة الكليات الأدبية",              college: "", photo: "", phone: "", whatsapp: "", email: "" },
-  { name: "", category: "rabigh",        role: "ممثل كليات فرع رابغ",                college: "", photo: "", phone: "", whatsapp: "", email: "" },
-  { name: "", category: "rabigh",        role: "ممثلة كليات فرع رابغ",               college: "", photo: "", phone: "", whatsapp: "", email: "" },
-  { name: "مروان الغامدي", category: "graduate",      role: "ممثل الدراسات العليا",               college: "", photo: "", phone: "", whatsapp: "", email: "" },
-  { name: "", category: "graduate",      role: "ممثلة الدراسات العليا",              college: "", photo: "", phone: "", whatsapp: "", email: "" },
-  { name: "", category: "international", role: "ممثل/ة الطلبة الدوليين",             college: "", photo: "", phone: "", whatsapp: "", email: "" },
-  { name: "", category: "disability",    role: "ممثل/ة الطلبة ذوي الإعاقة",          college: "", photo: "", phone: "", whatsapp: "", email: "" }
+  { id: "aseel",   name: "أصيل علاء الدين محمد",    category: "health",        role: "ممثل الكليات الصحية",               photo: "images/members/aseel.jpg.png", bio: "", college: "", phone: "", whatsapp: "561196759", email: "amohammed0388@stu.kau.edu.sa" },
+  { id: "sultana", name: "سلطانة بندر آل مساعد",    category: "health",        role: "ممثلة الكليات الصحية",              photo: "images/members/sultanah.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "ziyad",   name: "زياد محمد الغامدي",       category: "engineering",   role: "ممثل الكليات الهندسية والحاسوبية",  photo: "images/members/ziyad.jpeg",    bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "jood",    name: "جود خالد بالخير",         category: "engineering",   role: "ممثلة الكليات الهندسية والحاسوبية", photo: "images/members/jood.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "battal",  name: "بتال فيصل الغامدي",       category: "science",       role: "ممثل الكليات العلمية",              photo: "images/members/battal.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "ghala",   name: "غلا محمد جباري",          category: "science",       role: "ممثلة الكليات العلمية",             photo: "images/members/ghala.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "badr",    name: "بدر شبل العتيبي",         category: "humanities",    role: "ممثل الكليات الأدبية",              photo: "images/members/badr.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "abeer",   name: "عبير صالح المنصوري",      category: "humanities",    role: "ممثلة الكليات الأدبية",             photo: "",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "turki",   name: "تركي أيمن قشلان",         category: "rabigh",        role: "ممثل كليات فرع رابغ",               photo: "images/members/turki.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "jana",    name: "جنى مازن عالم",           category: "rabigh",        role: "ممثلة كليات فرع رابغ",              photo: "images/members/jana.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "marwan",  name: "مروان عبدالرحمن الغامدي", category: "graduate",      role: "ممثل الدراسات العليا",              photo: "images/members/marwan.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "abrar",   name: "أبرار أكرم الكعبي",       category: "graduate",      role: "ممثلة الدراسات العليا",             photo: "images/members/abrar.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "saber",   name: "صابر ريحان",              category: "international", role: "ممثل الطلبة الدوليين",              photo: "images/members/saber.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
+  { id: "yousef",  name: "يوسف حسن شراحيلي",        category: "disability",    role: "ممثل الطلبة ذوي الإعاقة",           photo: "images/members/yousef.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" }
 ];
 
 /* ---------- الاستبيانات ----------

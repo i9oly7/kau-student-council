@@ -1,52 +1,10 @@
 /* =========================================================
-   script.js — التفاعلات: القائمة، عرض الأعضاء، البحث والتصفية،
-   «من يمثّلني؟»، الاستبيانات، والحركات عند التمرير.
-   يعتمد على البيانات الموجودة في data.js — لا تحتاج لتعديل هذا الملف.
+   script.js — تفاعلات الصفحة الرئيسية: الهيكل، عرض الأعضاء،
+   البحث والتصفية، «من يمثّلني؟»، والاستبيانات.
+   يعتمد على data.js و common.js — لا تحتاج لتعديل هذا الملف.
    ========================================================= */
 
-document.documentElement.classList.remove("no-js");
-
-/* ---------- أدوات مساعدة ---------- */
-
-// حماية النصوص قبل إدراجها في الصفحة
-function escapeHTML(value) {
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-// تحويل الأرقام العربية إلى إنجليزية وإزالة المسافات والرموز
-function normalizePhone(raw) {
-  if (!raw) return "";
-  const western = String(raw).replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
-  const digits = western.replace(/\D/g, "").replace(/^00/, "");
-  // نقبل فقط الأرقام بطول منطقي (8 إلى 15 رقمًا حسب المعيار الدولي)
-  return digits.length >= 8 && digits.length <= 15 ? digits : "";
-}
-
-// السماح فقط بروابط http/https الصحيحة
-function safeURL(raw) {
-  if (!raw) return "";
-  try {
-    const url = new URL(raw);
-    return url.protocol === "https:" || url.protocol === "http:" ? url.href : "";
-  } catch {
-    return "";
-  }
-}
-
-// نقبل مسارًا داخليًا مثل images/members/a.jpg أو رابط https فقط
-function safeImagePath(raw) {
-  if (!raw) return "";
-  return /^[a-z][a-z0-9+.-]*:/i.test(raw) ? safeURL(raw) : raw;
-}
-
-function isEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value || "");
-}
+/* ---------- أدوات خاصة بالصفحة الرئيسية ---------- */
 
 // توحيد الحروف العربية لتحسين البحث (أ/إ/آ → ا، ة → ه، ى → ي، وإزالة التشكيل)
 function normalizeArabic(text) {
@@ -76,85 +34,15 @@ function getSurveyStatus(survey) {
   return "open";
 }
 
-const icons = {
-  phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>',
-  whatsapp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>',
-  email: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4 7.3V17h16V7.3z"/></svg>',
-  person: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg>'
-};
-
-const info = typeof COUNCIL_INFO !== "undefined" ? COUNCIL_INFO : {};
-
-// بطاقة بصورة كاملة والاسم فوقها (للقيادات والممثلين)
-// options: { photo, name, title, subtitle, label, pending }
-function portraitHTML({ photo, name, title, subtitle, label, pending }) {
-  const src = safeImagePath(photo);
-  return `
-    <div class="portrait">
-      <div class="portrait-fallback" aria-hidden="true">${icons.person}</div>
-      ${src ? `<img src="${escapeHTML(src)}" alt="صورة ${name || title}" loading="lazy">` : ""}
-      ${label ? `<span class="portrait-label">${label}</span>` : ""}
-      <div class="portrait-text">
-        <h3 class="${pending ? "is-pending" : ""}">${name || title}</h3>
-        ${name && title ? `<p>${title}</p>` : ""}
-        ${subtitle ? `<p class="portrait-sub">${subtitle}</p>` : ""}
-      </div>
-    </div>`;
+// بطاقة قابلة للضغط إذا كان للشخص ملف شخصي، وإلا بطاقة عادية
+function cardWrapper(person, className, inner, ariaName) {
+  const url = profileURL(person);
+  return url
+    ? `<a class="${className} is-link" href="${escapeHTML(url)}" aria-label="عرض الملف الشخصي: ${ariaName}">${inner}</a>`
+    : `<article class="${className}">${inner}</article>`;
 }
 
-// إذا لم تُحمَّل صورة (مسار خاطئ مثلًا) نحذفها ليظهر الرمز البديل
-function handleBrokenPhotos(container) {
-  container.querySelectorAll(".portrait img").forEach((img) => {
-    img.addEventListener("error", () => img.remove(), { once: true });
-  });
-}
-
-
-/* ---------- الشعار (إن وُجد) ---------- */
-(function renderLogo() {
-  const logo = safeImagePath(info.logo);
-  if (!logo) return;
-  const mark = document.getElementById("brandMark");
-  const img = new Image();
-  img.alt = "";
-  img.onload = () => { mark.innerHTML = ""; mark.appendChild(img); };
-  img.src = logo; // إذا لم يُعثر على الملف يبقى الرمز البديل
-})();
-
-/* ---------- القائمة العلوية ---------- */
-const header = document.getElementById("siteHeader");
-const navToggle = document.getElementById("navToggle");
-const mainNav = document.getElementById("mainNav");
-
-function closeMenu() {
-  mainNav.classList.remove("is-open");
-  navToggle.setAttribute("aria-expanded", "false");
-  navToggle.setAttribute("aria-label", "فتح القائمة");
-}
-
-navToggle.addEventListener("click", () => {
-  const isOpen = mainNav.classList.toggle("is-open");
-  navToggle.setAttribute("aria-expanded", String(isOpen));
-  navToggle.setAttribute("aria-label", isOpen ? "إغلاق القائمة" : "فتح القائمة");
-});
-
-// إغلاق القائمة عند اختيار رابط (في الجوال)
-mainNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") { closeMenu(); closeModal(); }
-});
-
-// ظل الشريط وزر العودة للأعلى عند التمرير
-const backToTop = document.getElementById("backToTop");
-function onScroll() {
-  header.classList.toggle("is-scrolled", window.scrollY > 10);
-  backToTop.classList.toggle("is-visible", window.scrollY > 600);
-}
-window.addEventListener("scroll", onScroll, { passive: true });
-onScroll();
-
-// تمييز رابط القسم الظاهر حاليًا
+// تمييز رابط القسم الظاهر حاليًا في القائمة العلوية
 const navLinks = document.querySelectorAll(".nav-link");
 const sectionObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
@@ -184,24 +72,27 @@ function closeModal() {
   if (lastFocused) lastFocused.focus();
 }
 modal.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", closeModal));
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeModal();
+});
 
 /* ---------- هيكل المجلس ---------- */
 (function renderStructure() {
-  const leadership = typeof LEADERSHIP !== "undefined" && Array.isArray(LEADERSHIP) ? LEADERSHIP : [];
   const org = document.querySelector(".org");
 
   // بطاقة كبيرة لكل من الرئيس والأمين وأعضاء القيادات
   function topCard(person, label, extraClass) {
     if (!person) return "";
-    return `
-      <article class="org-card ${extraClass}">
-        ${portraitHTML({
-          photo: person.photo,
-          name: escapeHTML(person.name || ""),
-          title: escapeHTML(person.position || ""),
-          label
-        })}
-      </article>`;
+    const name = escapeHTML(person.name || "");
+    const position = escapeHTML(person.position || "");
+    const inner = portraitHTML({
+      photo: person.photo,
+      name,
+      title: position,
+      label,
+      cta: Boolean(person.id)
+    });
+    return cardWrapper(person, `org-card ${extraClass}`, inner, name || position);
   }
 
   document.getElementById("orgChair").innerHTML =
@@ -225,10 +116,6 @@ const searchInput = document.getElementById("memberSearch");
 const categoryFilter = document.getElementById("categoryFilter");
 const contactCollege = document.getElementById("contactCollege");
 
-const categories = typeof CATEGORIES !== "undefined" && Array.isArray(CATEGORIES) ? CATEGORIES : [];
-const members = typeof MEMBERS !== "undefined" && Array.isArray(MEMBERS) ? MEMBERS : [];
-const categoryById = Object.fromEntries(categories.map((c) => [c.id, c]));
-
 // قائمة الفئات في قسم الأعضاء
 categories.forEach((cat) => categoryFilter.add(new Option(cat.name, cat.id)));
 
@@ -247,42 +134,19 @@ function searchableText(member) {
 }
 
 function memberCardHTML(member) {
-  const cat = categoryById[member.category] || {};
   const hasName = Boolean(member.name && member.name.trim());
   const name = hasName ? escapeHTML(member.name) : "";
-  const label = name || escapeHTML(member.role);
-  const phone = normalizePhone(member.phone);
-  const whatsapp = normalizePhone(member.whatsapp);
-  const email = isEmail(member.email) ? member.email : "";
-
-  const buttons = [];
-  if (phone) {
-    buttons.push(`<a class="contact-btn" href="tel:+${phone}" aria-label="اتصال بـ ${label}">${icons.phone}اتصال</a>`);
-  }
-  if (whatsapp) {
-    buttons.push(`<a class="contact-btn whatsapp" href="https://wa.me/${whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="مراسلة ${label} عبر واتساب">${icons.whatsapp}واتساب</a>`);
-  }
-  if (email) {
-    buttons.push(`<a class="contact-btn" href="mailto:${escapeHTML(email)}" aria-label="مراسلة ${label} بالبريد">${icons.email}بريد</a>`);
-  }
-
-  const contact = buttons.length
-    ? buttons.join("")
-    : `<p class="no-contact">وسيلة التواصل غير متاحة حاليًا</p>`;
-
-  return `
-    <article class="member-card">
-      ${portraitHTML({
-        photo: member.photo,
-        name: hasName ? name : "يُعلن قريبًا",
-        title: escapeHTML(member.role || ""),
-        subtitle: escapeHTML(member.college || (member.role ? "" : cat.name || "")),
-        pending: !hasName
-      })}
-      <div class="member-contact">${contact}</div>
-    </article>`;
+  const inner = portraitHTML({
+    photo: member.photo,
+    name: hasName ? name : "يُعلن قريبًا",
+    title: escapeHTML(member.role || ""),
+    subtitle: escapeHTML(member.college || ""),
+    pending: !hasName,
+    cta: hasName && Boolean(member.id)
+  });
+  // لا نفتح ملفًا شخصيًا لمقعد لم يُعلن اسمه بعد
+  return cardWrapper(hasName ? member : null, "member-card", inner, name);
 }
-
 
 function renderMembers() {
   const query = normalizeArabic(searchInput.value);
@@ -295,7 +159,6 @@ function renderMembers() {
   });
 
   membersGrid.innerHTML = filtered.map(memberCardHTML).join("");
-
   handleBrokenPhotos(membersGrid);
 
   membersEmpty.hidden = filtered.length > 0;
@@ -400,33 +263,8 @@ document.querySelectorAll(".survey-tabs .tab").forEach((tab) => {
 
 renderSurveys();
 
-/* ---------- وسائل التواصل الرسمية في التذييل ---------- */
-(function renderOfficialContacts() {
-  const list = document.getElementById("officialContacts");
-  const items = [];
-
-  if (isEmail(info.email)) {
-    items.push(`<li><a href="mailto:${escapeHTML(info.email)}">${escapeHTML(info.email)}</a></li>`);
-  }
-  [["website", "موقع الجامعة"], ["x", "منصة X"], ["snapchat", "Snapchat"], ["instagram", "Instagram"]].forEach(([key, label]) => {
-    const url = safeURL(info[key]);
-    if (url) items.push(`<li><a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${label}</a></li>`);
-  });
-
-  list.innerHTML = items.length
-    ? items.join("")
-    : `<li class="placeholder">ستُضاف وسائل التواصل الرسمية قريبًا.</li>`;
-})();
-
-document.getElementById("year").textContent = new Date().getFullYear();
-
-/* ---------- الحركة عند التمرير ---------- */
-const revealObserver = new IntersectionObserver((entries, obs) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("is-visible");
-      obs.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+// إذا فُتحت الصفحة برابط مثل index.html#members نضبط التمرير بعد رسم البطاقات
+if (location.hash) {
+  const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (target) target.scrollIntoView();
+}
