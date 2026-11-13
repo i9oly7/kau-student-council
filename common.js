@@ -110,8 +110,9 @@ function handleBrokenPhotos(container) {
   if (!logo || !mark) return;
   const img = new Image();
   img.alt = "";
+  // لا نُدرج الصورة إلا بعد نجاح التحميل، فتبقى المساحة فارغة إن لم يُعثر على الملف
   img.onload = () => { mark.innerHTML = ""; mark.appendChild(img); };
-  img.src = logo; // إذا لم يُعثر على الملف يبقى الرمز البديل
+  img.src = logo;
 })();
 
 /* ---------- القائمة العلوية ---------- */
