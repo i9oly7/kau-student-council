@@ -55,8 +55,15 @@ const icons = {
   x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.2-8.3L2 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></svg>',
   linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zm7 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></svg>',
   link: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.5-3.5a1 1 0 1 1 1.4 1.4L12 13.4a1 1 0 0 1-1.4 0zM8.5 19a4.5 4.5 0 0 1-3.2-7.7l2.1-2.1a1 1 0 0 1 1.4 1.4l-2.1 2.1a2.5 2.5 0 0 0 3.5 3.5l2.1-2.1a1 1 0 0 1 1.4 1.4l-2.1 2.1A4.5 4.5 0 0 1 8.5 19zm7.4-4.8a1 1 0 0 1-.7-1.7l2.1-2.1a2.5 2.5 0 0 0-3.5-3.5l-2.1 2.1a1 1 0 0 1-1.4-1.4l2.1-2.1a4.5 4.5 0 0 1 6.4 6.4l-2.1 2.1a1 1 0 0 1-.8.2z"/></svg>',
-  person: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg>'
+  person: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg>',
+  // رمز بديل لعضوة ترتدي الحجاب — يُستخدم عند avatar: "hijab"
+  personHijab: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-opacity=".55" d="M12 1.6C8 1.6 5 4.5 5 8.6c0 2 .5 3.4 1.2 4.5-2.2 1-3.7 2.9-4.1 5.3l-.5 3.4c-.1.6.4 1.2 1 1.2h18.8c.6 0 1.1-.6 1-1.2l-.5-3.4c-.4-2.4-1.9-4.3-4.1-5.3.7-1.1 1.2-2.5 1.2-4.5 0-4.1-3-7-7-7Z"/><path d="M12 4.5c2 0 3.5 1.9 3.5 4.3S14 13.2 12 13.2 8.5 11.2 8.5 8.8 10 4.5 12 4.5Z"/></svg>'
 };
+
+// اختيار الرمز البديل حسب avatar في بيانات الشخص
+function fallbackIcon(avatar) {
+  return avatar === "hijab" ? icons.personHijab : icons.person;
+}
 
 const info = typeof COUNCIL_INFO !== "undefined" ? COUNCIL_INFO : {};
 const leadership = typeof LEADERSHIP !== "undefined" && Array.isArray(LEADERSHIP) ? LEADERSHIP : [];
@@ -70,13 +77,14 @@ function profileURL(person) {
 }
 
 // بطاقة بصورة كاملة والاسم فوقها (للقيادات والممثلين)
-// options: { photo, name, title, subtitle, label, pending, cta, bare }
-// bare: صورة فقط بدون النص فوقها (تُستخدم في صفحة الملف الشخصي)
-function portraitHTML({ photo, name, title, subtitle, label, pending, cta, bare }) {
+// options: { photo, avatar, name, title, subtitle, label, pending, cta, bare }
+// bare:   صورة فقط بدون النص فوقها (تُستخدم في صفحة الملف الشخصي)
+// avatar: نوع الرمز البديل عند غياب الصورة — "hijab" أو اتركه فارغًا للرمز العام
+function portraitHTML({ photo, avatar, name, title, subtitle, label, pending, cta, bare }) {
   const src = safeImagePath(photo);
   return `
     <div class="portrait${bare ? " is-bare" : ""}">
-      <div class="portrait-fallback" aria-hidden="true">${icons.person}</div>
+      <div class="portrait-fallback${avatar === "hijab" ? " is-hijab" : ""}" aria-hidden="true">${fallbackIcon(avatar)}</div>
       ${src ? `<img src="${escapeHTML(src)}" alt="صورة ${name || title}" loading="lazy">` : ""}
       ${label ? `<span class="portrait-label">${label}</span>` : ""}
       ${bare ? "" : `<div class="portrait-text">

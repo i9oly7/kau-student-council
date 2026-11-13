@@ -42,10 +42,19 @@
   const badge = isLeader ? groupLabels[person.group] || "" : (isFemale ? "ممثلة الطلبة في المجلس" : "ممثل الطلبة في المجلس");
   document.title = `${person.name || person.position} | المجلس الاستشاري الطلابي`;
 
-  // النبذة: نحافظ على الأسطر الجديدة إن وُجدت
-  const bio = person.bio && person.bio.trim()
+  // النبذة: للقيادات فقط — الممثلون من الطلاب بلا خانة نبذة
+  // نحافظ على الأسطر الجديدة إن وُجدت
+  const bioText = isLeader && person.bio && person.bio.trim()
     ? `<p class="profile-bio">${escapeHTML(person.bio).replace(/\n/g, "<br>")}</p>`
-    : `<p class="muted">سيُضاف التعريف قريبًا.</p>`;
+    : isLeader
+      ? `<p class="muted">سيُضاف التعريف قريبًا.</p>`
+      : "";
+  const bioSection = isLeader
+    ? `<section class="profile-block">
+          <h2>نبذة</h2>
+          ${bioText}
+        </section>`
+    : "";
 
   // الكليات التي يمثّلها (للممثلين فقط)
   let represents = "";
@@ -95,7 +104,7 @@
 
     <div class="profile-layout">
       <div class="profile-photo reveal">
-        ${portraitHTML({ photo: person.photo, name, bare: true })}
+        ${portraitHTML({ photo: person.photo, avatar: person.avatar, name, bare: true })}
       </div>
 
       <div class="profile-body reveal">
@@ -104,10 +113,7 @@
         <p class="profile-title">${title}</p>
         ${!isLeader && person.college ? `<p class="muted">${escapeHTML(person.college)}</p>` : ""}
 
-        <section class="profile-block">
-          <h2>نبذة</h2>
-          ${bio}
-        </section>
+        ${bioSection}
 
         ${represents}
 

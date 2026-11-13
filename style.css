@@ -224,6 +224,8 @@ p { margin: 0 0 1em; }
 }
 .portrait-fallback { position: absolute; inset: 0 0 25% 0; display: grid; place-items: center; }
 .portrait-fallback svg { width: 38%; height: auto; fill: rgba(255, 255, 255, .35); }
+/* رمز العضوة المحجبة: رسمته تملأ مساحة أكبر فيحتاج حجمًا أكبر ليتوازن مع الرمز العام */
+.portrait-fallback.is-hijab svg { width: 50%; }
 .portrait-label {
   position: absolute; top: 14px; right: 14px; z-index: 1;
   padding: 3px 12px; border-radius: 999px; font-size: .8rem; font-weight: 700;

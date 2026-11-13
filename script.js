@@ -87,6 +87,7 @@ document.addEventListener("keydown", (e) => {
     const position = escapeHTML(person.position || "");
     const inner = portraitHTML({
       photo: person.photo,
+      avatar: person.avatar,
       name,
       title: position,
       label,
@@ -138,6 +139,7 @@ function memberCardHTML(member) {
   const name = hasName ? escapeHTML(member.name) : "";
   const inner = portraitHTML({
     photo: member.photo,
+    avatar: member.avatar,
     name: hasName ? name : "يُعلن قريبًا",
     title: escapeHTML(member.role || ""),
     subtitle: escapeHTML(member.college || ""),

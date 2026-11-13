@@ -33,7 +33,7 @@ const LEADERSHIP = [
   { id: "fouad",  group: "secretary", position: "عميد شؤون الطلاب",                            name: "أ.د. فؤاد بن أحمد ابولبن",     photo: "images/leaders/FOuad.jpg",  bio: "" },
   { id: "omody",  group: "leader",    position: "نائب رئيس الجامعة للحياة الجامعية والتشغيل", name: "د. محمد بن أحمد العمودي",      photo: "images/leaders/omody.jpg",  bio: "" },
   { id: "ghamdi", group: "leader",    position: "عميد عمادة القبول والتسجيل",                  name: "د.جمعان بن صالح الغامدي",      photo: "images/leaders/ghamdi.jpg", bio: "" },
-  { id: "sulami", group: "leader",    position: "وكيل عمادة الدراسات العليا",                  name: "د.عبدالوهاب بن مستور السلمي",  photo: "",                          bio: "" },
+  { id: "sulami", group: "leader",    position: "وكيل عمادة الدراسات العليا",                  name: "د.عبدالوهاب بن مستور السلمي",  photo: "images/leaders/sulami.png", bio: "" },
   { id: "musab",  group: "leader",    position: "الرئيس التنفيذي للاتصال المؤسسي",             name: "د.مصعب بن فالح الحربي",       photo: "images/leaders/musab.jpg",  bio: "" }
 ];
 /* ---------- فئات التمثيل والكليات التابعة لها ----------
@@ -94,6 +94,7 @@ const CATEGORIES = [
    role:     الصفة داخل المجلس
    college:  كلية العضو (اختياري)
    photo:    مسار الصورة، مثال: "images/members/name.jpg" — اتركه "" لعرض رمز بديل
+   avatar:   نوع الرمز البديل عند غياب الصورة: "hijab" لرمز محجبة — احذفه لاستخدام الرمز العام
    phone:    رقم الاتصال المصرّح بنشره بالصيغة الدولية، مثال: "+9665XXXXXXXX" — اتركه "" لإخفاء زر الاتصال
    whatsapp: رقم واتساب المعتمد بالصيغة الدولية — اتركه "" لإخفاء زر واتساب
    email:    البريد الجامعي (اختياري) — اتركه "" لإخفائه
@@ -101,20 +102,20 @@ const CATEGORIES = [
    ⚠️ لا تنشر أي رقم أو بريد إلا بموافقة العضو.
 */
 const MEMBERS = [
-  { id: "aseel",   name: "أصيل علاء الدين محمد",    category: "health",        role: "ممثل الكليات الصحية",               photo: "images/members/aseel.jpg.png", bio: "", college: "", phone: "", whatsapp: "561196759", email: "amohammed0388@stu.kau.edu.sa" },
-  { id: "sultana", name: "سلطانة بندر آل مساعد",    category: "health",        role: "ممثلة الكليات الصحية",              photo: "images/members/sultanah.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "ziyad",   name: "زياد محمد الغامدي",       category: "engineering",   role: "ممثل الكليات الهندسية والحاسوبية",  photo: "images/members/ziyad.jpeg",    bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "jood",    name: "جود خالد بالخير",         category: "engineering",   role: "ممثلة الكليات الهندسية والحاسوبية", photo: "images/members/jood.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "battal",  name: "بتال فيصل الغامدي",       category: "science",       role: "ممثل الكليات العلمية",              photo: "images/members/battal.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "ghala",   name: "غلا محمد جباري",          category: "science",       role: "ممثلة الكليات العلمية",             photo: "images/members/ghala.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "badr",    name: "بدر شبل العتيبي",         category: "humanities",    role: "ممثل الكليات الأدبية",              photo: "images/members/badr.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "abeer",   name: "عبير صالح المنصوري",      category: "humanities",    role: "ممثلة الكليات الأدبية",             photo: "",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "turki",   name: "تركي أيمن قشلان",         category: "rabigh",        role: "ممثل كليات فرع رابغ",               photo: "images/members/turki.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "jana",    name: "جنى مازن عالم",           category: "rabigh",        role: "ممثلة كليات فرع رابغ",              photo: "images/members/jana.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "marwan",  name: "مروان عبدالرحمن الغامدي", category: "graduate",      role: "ممثل الدراسات العليا",              photo: "images/members/marwan.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "abrar",   name: "أبرار أكرم الكعبي",       category: "graduate",      role: "ممثلة الدراسات العليا",             photo: "images/members/abrar.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "saber",   name: "صابر ريحان",              category: "international", role: "ممثل الطلبة الدوليين",              photo: "images/members/saber.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" },
-  { id: "yousef",  name: "يوسف حسن شراحيلي",        category: "disability",    role: "ممثل الطلبة ذوي الإعاقة",           photo: "images/members/yousef.jpg",                             bio: "", college: "", phone: "", whatsapp: "", email: "" }
+  { id: "aseel",   name: "أصيل علاء الدين محمد",    category: "health",        role: "ممثل الكليات الصحية",               photo: "images/members/aseel.jpg.png", college: "", phone: "", whatsapp: "561196759", email: "amohammed0388@stu.kau.edu.sa" },
+  { id: "sultana", name: "سلطانة بندر آل مساعد",    category: "health",        role: "ممثلة الكليات الصحية",              photo: "images/members/sultanah.jpg",                             college: "", phone: "", whatsapp: "", email: "salmusaad0003@stu.kau.edu.sa" },
+  { id: "ziyad",   name: "زياد محمد الغامدي",       category: "engineering",   role: "ممثل الكليات الهندسية والحاسوبية",  photo: "images/members/ziyad.jpeg",    college: "", phone: "", whatsapp: "", email: "cs.zyad0@gmail.com" },
+  { id: "jood",    name: "جود خالد بالخير",         category: "engineering",   role: "ممثلة الكليات الهندسية والحاسوبية", photo: "images/members/jood.jpg",                             college: "", phone: "", whatsapp: "", email: "jbalkhair0001@stu.kau.edu.sa" },
+  { id: "battal",  name: "بتال فيصل الغامدي",       category: "science",       role: "ممثل الكليات العلمية",              photo: "images/members/battal.jpg",                             college: "", phone: "", whatsapp: "", email: "balghamdi0600@stu.kau.edu.sa" },
+  { id: "ghala",   name: "غلا محمد جباري",          category: "science",       role: "ممثلة الكليات العلمية",             photo: "images/members/ghala.jpg",                             college: "", phone: "", whatsapp: "", email: "GJABBARY0001@stu.kau.edu.sa" },
+  { id: "badr",    name: "بدر شبل العتيبي",         category: "humanities",    role: "ممثل الكليات الأدبية",              photo: "images/members/badr.jpg",                             college: "", phone: "", whatsapp: "", email: "balotaibi0240@stu.kau.edu.sa" },
+  { id: "abeer",   name: "عبير صالح المنصوري",      category: "humanities",    role: "ممثلة الكليات الأدبية",             photo: "", avatar: "hijab",            college: "", phone: "", whatsapp: "", email: "aalmansouri0010@stu.kau.edu.sa" },
+  { id: "turki",   name: "تركي أيمن قشلان",         category: "rabigh",        role: "ممثل كليات فرع رابغ",               photo: "images/members/turki.jpg",                             college: "", phone: "", whatsapp: "", email: "tqashlan@stu.kau.edu.sa" },
+  { id: "jana",    name: "جنى مازن عالم",           category: "rabigh",        role: "ممثلة كليات فرع رابغ",              photo: "images/members/jana.jpg",                             college: "", phone: "", whatsapp: "", email: "JAALEM@stu.kau.edu.sa" },
+  { id: "marwan",  name: "مروان عبدالرحمن الغامدي", category: "graduate",      role: "ممثل الدراسات العليا",              photo: "images/members/marwan.jpg",                             college: "", phone: "", whatsapp: "", email: "malghamdi2449@stu.kau.edu.sa" },
+  { id: "abrar",   name: "أبرار أكرم الكعبي",       category: "graduate",      role: "ممثلة الدراسات العليا",             photo: "images/members/abrar.jpg",                             college: "", phone: "", whatsapp: "", email: "aalkaabi0013@stu.kau.edu.sa" },
+  { id: "saber",   name: "صابر ريحان",              category: "international", role: "ممثل الطلبة الدوليين",              photo: "images/members/saber.jpg",                             college: "", phone: "", whatsapp: "", email: "srayhan@stu.kau.edu.sa" },
+  { id: "yousef",  name: "يوسف حسن شراحيلي",        category: "disability",    role: "ممثل الطلبة ذوي الإعاقة",           photo: "images/members/yousef.jpg",                             college: "", phone: "", whatsapp: "", email: "ysharahili0002@stu.kau.edu.sa" }
 ];
 
 /* ---------- الاستبيانات ----------
