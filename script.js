@@ -80,7 +80,8 @@ document.addEventListener("keydown", (e) => {
 (function renderStructure() {
   const org = document.querySelector(".org");
 
-  // بطاقة كبيرة لكل من الرئيس والأمين وأعضاء القيادات
+  // بطاقة كبيرة لكل من الرئيس والأمين وأعضاء القيادات.
+  // لا صفحة شخصية للقيادات: البطاقة للعرض فقط وغير قابلة للضغط.
   function topCard(person, label, extraClass) {
     if (!person) return "";
     const name = escapeHTML(person.name || "");
@@ -90,10 +91,9 @@ document.addEventListener("keydown", (e) => {
       avatar: person.avatar,
       name,
       title: position,
-      label,
-      cta: Boolean(person.id)
+      label
     });
-    return cardWrapper(person, `org-card ${extraClass}`, inner, name || position);
+    return cardWrapper(null, `org-card ${extraClass}`, inner, name || position);
   }
 
   document.getElementById("orgChair").innerHTML =
@@ -115,17 +115,14 @@ const membersEmpty = document.getElementById("membersEmpty");
 const resultsCount = document.getElementById("resultsCount");
 const searchInput = document.getElementById("memberSearch");
 const categoryFilter = document.getElementById("categoryFilter");
-const contactCollege = document.getElementById("contactCollege");
 
-// قائمة الفئات في قسم الأعضاء
-categories.forEach((cat) => categoryFilter.add(new Option(cat.name, cat.id)));
-
-// قائمة «من يمثّلني؟»: الكليات مجمّعة حسب الفئة
+// قائمة الكليات مجمّعة تحت فئتها: يختار الطالب كليته فتُعرض له فئة ممثليه مباشرة.
+// قيمة كل خيار هي معرّف الفئة، فالتصفية تتم على الفئة لا على اسم الكلية.
 categories.forEach((cat) => {
   const group = document.createElement("optgroup");
   group.label = cat.name;
   (cat.colleges || []).forEach((college) => group.appendChild(new Option(college, cat.id)));
-  contactCollege.appendChild(group);
+  categoryFilter.appendChild(group);
 });
 
 // نص البحث لكل عضو: الاسم والصفة والكلية واسم الفئة وكلياتها
@@ -164,9 +161,16 @@ function renderMembers() {
   handleBrokenPhotos(membersGrid);
 
   membersEmpty.hidden = filtered.length > 0;
-  resultsCount.textContent = members.length
-    ? `عدد النتائج: ${filtered.length} من ${members.length}`
-    : "لم تُضف بيانات الأعضاء بعد.";
+
+  if (!members.length) {
+    resultsCount.textContent = "لم تُضف بيانات الأعضاء بعد.";
+    return;
+  }
+  // عند اختيار كلية نوضّح الفئة التي تمثّلها بدل عدّ النتائج فقط
+  const cat = category ? categoryById[category] : null;
+  resultsCount.textContent = cat
+    ? `يمثّلك في المجلس ممثلو «${cat.name}» — عدد النتائج: ${filtered.length}`
+    : `عدد النتائج: ${filtered.length} من ${members.length}`;
 }
 
 searchInput.addEventListener("input", renderMembers);
@@ -176,23 +180,6 @@ document.getElementById("resetFilters").addEventListener("click", () => {
   categoryFilter.value = "";
   renderMembers();
   searchInput.focus();
-});
-
-// «من يمثّلني؟»: عرض ممثلي فئة الكلية المختارة في قسم الأعضاء
-document.getElementById("showCollegeMembers").addEventListener("click", () => {
-  const hint = document.getElementById("contactHint");
-  const categoryId = contactCollege.value;
-  if (!categoryId) {
-    hint.textContent = "الرجاء اختيار كليتك أو فئتك أولًا.";
-    contactCollege.focus();
-    return;
-  }
-  const cat = categoryById[categoryId];
-  hint.textContent = `يمثّلك في المجلس ممثلو فئة «${cat.name}».`;
-  searchInput.value = "";
-  categoryFilter.value = categoryId;
-  renderMembers();
-  document.getElementById("members").scrollIntoView({ behavior: "smooth" });
 });
 
 renderMembers();

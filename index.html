@@ -39,7 +39,6 @@
           <li><a href="#about" class="nav-link">عن المجلس</a></li>
           <li><a href="#structure" class="nav-link">التشكيل</a></li>
           <li><a href="#members" class="nav-link">الأعضاء</a></li>
-          <li><a href="#contact" class="nav-link">تواصل</a></li>
         </ul>
         <a href="#surveys" class="btn btn-primary btn-sm nav-cta">شاركنا رأيك</a>
       </nav>
@@ -184,19 +183,19 @@
         <header class="section-head reveal">
           <span class="eyebrow">ممثلو الطلبة</span>
           <h2>تعرّف على ممثليك</h2>
-          <p>ابحث بالاسم أو باسم كليتك، أو اختر الفئة لعرض ممثليها.</p>
+          <p>اختر كليتك ليظهر لك ممثلوك مباشرة، أو ابحث بالاسم.</p>
         </header>
 
         <div class="filters" role="search">
           <div class="field">
-            <label for="memberSearch">البحث بالاسم أو الكلية</label>
-            <input type="search" id="memberSearch" placeholder="مثال: كلية الصيدلة" autocomplete="off">
+            <label for="categoryFilter">كليتك</label>
+            <select id="categoryFilter">
+              <option value="">جميع الكليات</option>
+            </select>
           </div>
           <div class="field">
-            <label for="categoryFilter">فئة التمثيل</label>
-            <select id="categoryFilter">
-              <option value="">جميع الفئات</option>
-            </select>
+            <label for="memberSearch">أو ابحث بالاسم</label>
+            <input type="search" id="memberSearch" placeholder="مثال: كلية الصيدلة" autocomplete="off">
           </div>
           <button type="button" class="btn btn-ghost" id="resetFilters">إعادة التعيين</button>
         </div>
@@ -206,36 +205,7 @@
         <div class="members-grid" id="membersGrid"></div>
 
         <div class="empty-state" id="membersEmpty" hidden>
-          <p>لا توجد نتائج مطابقة لبحثك. جرّب كلمة أخرى أو اختر «جميع الفئات».</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== التواصل ===================== -->
-    <section class="section section-alt" id="contact">
-      <div class="container contact-grid">
-        <div class="contact-text reveal">
-          <span class="eyebrow">تواصل مع المجلس</span>
-          <h2>اعثر على من يمثّلك</h2>
-          <ol class="mini-steps">
-            <li>اختر كليتك أو فئتك من القائمة.</li>
-            <li>سنعرض لك ممثلي فئتك في المجلس.</li>
-            <li>تواصل معهم عبر الوسائل المتاحة على بطاقاتهم، أو شارك في الاستبيانات.</li>
-          </ol>
-          <p class="muted">
-            لا تُعرض أرقام التواصل إلا بعد موافقة العضو واعتمادها. ويمكنك أيضًا التواصل مع أمانة المجلس
-            في عمادة شؤون الطلاب عبر القنوات الرسمية أسفل الصفحة.
-          </p>
-        </div>
-
-        <div class="contact-card reveal">
-          <h3>من يمثّلني؟</h3>
-          <label for="contactCollege">اختر كليتك أو فئتك</label>
-          <select id="contactCollege">
-            <option value="">— اختر —</option>
-          </select>
-          <button type="button" class="btn btn-primary btn-block" id="showCollegeMembers">اعرض ممثليّ</button>
-          <p class="form-hint" id="contactHint" aria-live="polite"></p>
+          <p>لا توجد نتائج مطابقة لبحثك. جرّب كلمة أخرى أو اختر «جميع الكليات».</p>
         </div>
       </div>
     </section>

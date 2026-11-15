@@ -299,7 +299,7 @@ p { margin: 0 0 1em; }
   display: grid; grid-template-columns: 2fr 1.4fr auto; gap: 16px; align-items: end;
   background: #fff; padding: 20px; border-radius: var(--radius); border: 1px solid var(--border);
 }
-.field label, .contact-card label { display: block; font-weight: 600; font-size: .9rem; margin-bottom: 6px; color: var(--primary); }
+.field label { display: block; font-weight: 600; font-size: .9rem; margin-bottom: 6px; color: var(--primary); }
 input[type="search"], select {
   width: 100%; padding: 12px 14px; font: inherit; color: var(--text);
   border: 1px solid var(--border); border-radius: var(--radius-sm); background: #fff;
@@ -333,29 +333,7 @@ input[type="search"]:focus, select:focus { outline: none; border-color: var(--gr
 .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); background: #fff; border: 1px dashed var(--border); border-radius: var(--radius); }
 .empty-state p { margin: 0; }
 
-/* ---------- 11. التواصل ---------- */
-.contact-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; align-items: center; }
-.contact-text h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
-.mini-steps { padding-right: 22px; margin: 0 0 18px; }
-.mini-steps li { margin-bottom: 8px; }
-.mini-steps li::marker { color: var(--green-dark); font-weight: 700; }
-.contact-card {
-  position: relative; overflow: hidden;
-  background: linear-gradient(160deg, var(--primary-light) 0%, var(--primary) 100%);
-  color: #fff; padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow-lg);
-}
-.contact-card::before {
-  content: ""; position: absolute; left: -30px; bottom: -30px; width: 130px; height: 130px;
-  background: var(--lime); opacity: .18; clip-path: polygon(0 0, 100% 50%, 0 100%);
-}
-.contact-card h3 { color: #fff; }
-.contact-card label { color: #d6ebe7; }
-.contact-card select { margin-bottom: 16px; border-color: transparent; }
-.contact-card .btn-primary { background: var(--lime); color: var(--primary-dark); }
-.contact-card .btn-primary:hover { background: #a0d65a; }
-.form-hint { margin: 12px 0 0; min-height: 1.5em; font-size: .9rem; color: #e9f6dc; position: relative; }
-
-/* ---------- 12. الاستبيانات ---------- */
+/* ---------- 11. الاستبيانات ---------- */
 .survey-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
 .tab {
   font: inherit; font-weight: 600; padding: 8px 22px; border-radius: 999px; cursor: pointer;
@@ -494,7 +472,6 @@ input[type="search"]:focus, select:focus { outline: none; border-color: var(--gr
   .hero-visual { order: -1; }
   .hero-svg { max-width: 260px; }
 
-  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
   .profile-layout { grid-template-columns: 1fr; gap: 28px; }
   .profile-photo { position: static; max-width: 320px; margin-inline: auto; width: 100%; }
   .footer-grid { grid-template-columns: 1fr 1fr; }

@@ -27,14 +27,16 @@ const COUNCIL_INFO = {
    name:     الاسم — اتركه "" ليظهر المنصب فقط
    photo:    مسار الصورة، مثال: "images/leaders/chair.jpg" — اتركه "" لعرض رمز بديل
    لإضافة عضو آخر من القيادات: انسخ أحد أسطر "leader" وعدّل المنصب.
+   ملاحظة: صفحات القيادات تعرض الاسم والمنصب فقط — بلا نبذة ولا وسائل تواصل،
+           لأن ممثلي الطلبة هم حلقة التواصل مع المجلس.
 */
 const LEADERSHIP = [
-  { id: "kabli",  group: "chair",     position: "نائب رئيس الجامعة للشؤون التعليمية",          name: "د. محمد بن رضا كابلي",        photo: "images/leaders/kabli.jpg",  bio: "" },
-  { id: "fouad",  group: "secretary", position: "عميد شؤون الطلاب",                            name: "أ.د. فؤاد بن أحمد ابولبن",     photo: "images/leaders/FOuad.jpg",  bio: "" },
-  { id: "omody",  group: "leader",    position: "نائب رئيس الجامعة للحياة الجامعية والتشغيل", name: "د. محمد بن أحمد العمودي",      photo: "images/leaders/omody.jpg",  bio: "" },
-  { id: "ghamdi", group: "leader",    position: "عميد عمادة القبول والتسجيل",                  name: "د.جمعان بن صالح الغامدي",      photo: "images/leaders/ghamdi.jpg", bio: "" },
-  { id: "sulami", group: "leader",    position: "وكيل عمادة الدراسات العليا",                  name: "د.عبدالوهاب بن مستور السلمي",  photo: "images/leaders/sulami.png", bio: "" },
-  { id: "musab",  group: "leader",    position: "الرئيس التنفيذي للاتصال المؤسسي",             name: "د.مصعب بن فالح الحربي",       photo: "images/leaders/musab.jpg",  bio: "" }
+  { id: "kabli",  group: "chair",     position: "نائب رئيس الجامعة للشؤون التعليمية",          name: "د. محمد بن رضا كابلي",        photo: "images/leaders/kabli.jpg"  },
+  { id: "fouad",  group: "secretary", position: "عميد شؤون الطلاب",                            name: "أ.د. فؤاد بن عبد العزيز أبو لبن", photo: "images/leaders/FOuad.jpg" },
+  { id: "omody",  group: "leader",    position: "نائب رئيس الجامعة للحياة الجامعية والتشغيل", name: "د. محمد بن أحمد العمودي",      photo: "images/leaders/omody.jpg"  },
+  { id: "ghamdi", group: "leader",    position: "عميد عمادة القبول والتسجيل",                  name: "د.جمعان بن صالح الغامدي",      photo: "images/leaders/ghamdi.jpg" },
+  { id: "sulami", group: "leader",    position: "وكيل عمادة الدراسات العليا",                  name: "د.عبدالوهاب بن مستور السلمي",  photo: "images/leaders/sulami.png" },
+  { id: "musab",  group: "leader",    position: "الرئيس التنفيذي للاتصال المؤسسي",             name: "د.مصعب بن فالح الحربي",       photo: "images/leaders/musab.jpg"  }
 ];
 /* ---------- فئات التمثيل والكليات التابعة لها ----------
    حسب «توزيع المرشحين والمرشحات حسب الكليات والفروع الأكاديمية» في الدليل.
@@ -56,12 +58,12 @@ const CATEGORIES = [
   {
     id: "science",
     name: "الكليات العلمية",
-    colleges: ["كلية العلوم", "كلية علوم الأرض", "كلية الدراسات البحرية", "كلية علوم البحار", "كلية العلوم البيئية", "كلية علوم الإنسان والتصاميم"]
+    colleges: ["كلية العلوم", "كلية التعدين", "كلية الاقتصاد والإدارة", "كلية الدراسات البحرية", "كلية علوم البحار", "كلية العلوم البيئية", "كلية علوم الإنسان والتصاميم"]
   },
   {
     id: "humanities",
     name: "الكليات الأدبية",
-    colleges: ["كلية الاقتصاد والإدارة", "كلية الحقوق", "كلية الآداب والعلوم الإنسانية", "كلية الاتصال والإعلام", "كلية السياحة"]
+    colleges: ["كلية الحقوق", "كلية الآداب والعلوم الإنسانية", "كلية الاتصال والإعلام", "كلية السياحة"]
   },
   {
     id: "rabigh",
