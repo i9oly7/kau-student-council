@@ -115,29 +115,10 @@ function handleBrokenPhotos(container) {
   img.src = logo;
 })();
 
-/* ---------- القائمة العلوية ---------- */
+/* ---------- الشريط العلوي ---------- */
+// لا توجد قائمة منسدلة: التبويبات ظاهرة دائمًا (أعلى الشاشة في الحاسب،
+// وفي شريط سفلي ثابت على الجوال).
 const header = document.getElementById("siteHeader");
-const navToggle = document.getElementById("navToggle");
-const mainNav = document.getElementById("mainNav");
-
-function closeMenu() {
-  mainNav.classList.remove("is-open");
-  navToggle.setAttribute("aria-expanded", "false");
-  navToggle.setAttribute("aria-label", "فتح القائمة");
-}
-
-navToggle.addEventListener("click", () => {
-  const isOpen = mainNav.classList.toggle("is-open");
-  navToggle.setAttribute("aria-expanded", String(isOpen));
-  navToggle.setAttribute("aria-label", isOpen ? "إغلاق القائمة" : "فتح القائمة");
-});
-
-// إغلاق القائمة عند اختيار رابط (في الجوال)
-mainNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeMenu();
-});
 
 // ظل الشريط وزر العودة للأعلى عند التمرير
 const backToTop = document.getElementById("backToTop");

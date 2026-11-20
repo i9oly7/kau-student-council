@@ -18,7 +18,7 @@
       <div class="profile-missing reveal">
         <h1>لم نجد هذا الملف الشخصي</h1>
         <p class="muted">قد يكون الرابط غير صحيح أو تم تحديث بيانات العضو.</p>
-        <a href="index.html#members" class="btn btn-primary">عرض كل الأعضاء</a>
+        <a href="index.html#directory" class="btn btn-primary">عرض دليل الممثلين</a>
       </div>`;
     observeReveal(root);
     return;
@@ -28,8 +28,8 @@
   const index = list.indexOf(person);
   const prev = list[(index - 1 + list.length) % list.length];
   const next = list[(index + 1) % list.length];
-  const backURL = "index.html#members";
-  const backLabel = "كل الأعضاء";
+  const backURL = "index.html#directory";
+  const backLabel = "دليل الممثلين";
 
   const name = escapeHTML(person.name || "");
   const title = escapeHTML(person.role || "");

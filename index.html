@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl" class="no-js">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>المجلس الاستشاري الطلابي | جامعة الملك عبدالعزيز</title>
   <meta name="description" content="المجلس الاستشاري الطلابي بجامعة الملك عبدالعزيز: جسر للتواصل الفعّال بين الطلاب وقيادات الجامعة.">
   <meta name="theme-color" content="#0d3b45">
@@ -18,6 +18,7 @@
 
   <a class="skip-link" href="#main">تخطَّ إلى المحتوى الرئيسي</a>
 
+
   <!-- ===================== الشريط العلوي ===================== -->
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
@@ -25,29 +26,28 @@
         <!-- يملؤه common.js بشعار الجامعة من COUNCIL_INFO.logo -->
         <span class="brand-mark" id="brandMark" aria-hidden="true"></span>
         <span class="brand-text">
-          <strong>المجلس الاستشاري الطلابي</strong>
+          <strong>المجلس الاستشاري الطلابي <span class="brand-badge">١٤٤٨هـ</span></strong>
           <small>جامعة الملك عبدالعزيز</small>
         </span>
       </a>
-
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="فتح القائمة">
-        <span></span><span></span><span></span>
-      </button>
-
-      <nav class="main-nav" id="mainNav" aria-label="التنقل الرئيسي">
-        <ul>
-          <li><a href="#about" class="nav-link">عن المجلس</a></li>
-          <li><a href="#structure" class="nav-link">التشكيل</a></li>
-          <li><a href="#members" class="nav-link">الأعضاء</a></li>
-        </ul>
-        <a href="#surveys" class="btn btn-primary btn-sm nav-cta">شاركنا رأيك</a>
-      </nav>
     </div>
   </header>
 
+  <!-- التبويبات الأربعة: تلتصق أعلى الشاشة أثناء التمرير -->
+  <nav class="main-nav" id="mainNav" aria-label="التنقل الرئيسي">
+    <div class="container">
+      <ul>
+        <li><a href="#about" class="nav-link">عن المجلس</a></li>
+        <li><a href="#structure" class="nav-link">التشكيل</a></li>
+        <li><a href="#represent" class="nav-link">ممثلوك</a></li>
+        <li><a href="#surveys" class="nav-link">شاركنا رأيك</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <main id="main">
 
-    <!-- ===================== الواجهة الرئيسية ===================== -->
+    <!-- ===================== الواجهة الافتتاحية ===================== -->
     <section class="hero" id="home">
       <div class="hero-bg" aria-hidden="true">
         <span class="tri tri-1"></span>
@@ -56,16 +56,22 @@
       </div>
       <div class="container hero-inner">
         <div class="hero-content reveal">
-          <span class="eyebrow">جامعة الملك عبدالعزيز · عمادة شؤون الطلاب</span>
-          <h1>صوتك يصل،<br><span class="highlight">ومستقبلك يهمنا</span></h1>
+          <span class="eyebrow">عمادة شؤون الطلاب</span>
+          <h1>صوتك يصل،<br>ومستقبلك يهمنا</h1>
           <p class="hero-lead">
-            المجلس الاستشاري الطلابي ركيزة أساسية في منظومة الحوكمة الجامعية، وجسر للتواصل الفعّال
-            بين الطلاب وقيادات الجامعة؛ يمثّل صوت الطلبة ويعزّز مشاركتهم في اتخاذ القرار.
+            المجلس الاستشاري الطلابي جسرٌ بين الطلبة وقيادات الجامعة؛
+            يمثّل صوتك ويعزّز مشاركتك في اتخاذ القرار.
           </p>
           <div class="hero-actions">
-            <a href="#about" class="btn btn-primary">تعرّف على المجلس</a>
-            <a href="#surveys" class="btn btn-outline">شاركنا رأيك</a>
+            <a href="#represent" class="btn btn-primary btn-block">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg>
+              من يمثّلني في المجلس؟
+            </a>
+            <a href="#surveys" class="hero-link">أو شاركنا رأيك في الاستطلاعات <span aria-hidden="true">›</span></a>
           </div>
+
+          <!-- مؤشرات مختصرة — تُحسب تلقائيًا من data.js -->
+          <ul class="hero-stats" id="heroStats"></ul>
         </div>
 
         <!-- رسم توضيحي يرمز للحوار والتمثيل الطلابي (بدون صور خارجية) -->
@@ -100,8 +106,6 @@
           </svg>
         </div>
       </div>
-
-      
     </section>
 
     <!-- ===================== عن المجلس ===================== -->
@@ -109,6 +113,7 @@
       <div class="container">
         <header class="section-head reveal">
           <span class="eyebrow">عن المجلس</span>
+          <h2>لماذا وُجد المجلس؟</h2>
         </header>
 
         <div class="vm-grid">
@@ -143,96 +148,94 @@
       </div>
     </section>
 
-        <!-- ===================== التشكيل والهيكل ===================== -->
+    <!-- ===================== تشكيل المجلس: ثلاثة مستويات ===================== -->
     <section class="section section-alt" id="structure">
       <div class="container">
         <header class="section-head reveal">
           <span class="eyebrow">تشكيل المجلس</span>
           <h2>هيكل المجلس الاستشاري الطلابي</h2>
-          <p>يُشكَّل المجلس بقرار من رئيس الجامعة وفق الهيكلة التالية.</p>
+          <p>يُشكَّل المجلس بقرار من رئيس الجامعة وفق ثلاثة مستويات.</p>
         </header>
 
-        <!-- تُعبّأ البطاقات تلقائيًا من LEADERSHIP في data.js -->
-        <div class="org reveal">
-          <div class="org-row" id="orgChair"></div>
-          <div class="org-row" id="orgSecretary"></div>
+        <!-- تُعبّأ المستويات تلقائيًا من LEADERSHIP في data.js -->
+        <div class="levels reveal">
+          <section class="level">
+            <h3 class="level-title"><span class="level-num">١</span> رئاسة المجلس</h3>
+            <div class="people" id="levelChair"></div>
+          </section>
 
-          <div class="org-group">
-            <span class="org-group-title">أعضاء من قيادات الجامعة</span>
-            <div class="org-grid" id="orgLeaders"></div>
-          </div>
+          <section class="level">
+            <h3 class="level-title"><span class="level-num">٢</span> أعضاء من قيادات الجامعة</h3>
+            <div class="people" id="levelLeaders"></div>
+          </section>
 
-          <div class="org-row">
-            <article class="org-card org-students">
-              <span class="org-label">أعضاء من الطلاب والطالبات</span>
-              <ul class="seat-list">
-                <li>ممثل وممثلة لكل من: الكليات الصحية، الهندسية والحاسوبية، العلمية، الأدبية، فرع رابغ، الدراسات العليا</li>
-                <li>ممثل/ة الطلبة الدوليين</li>
-                <li>ممثل/ة الطلبة ذوي الإعاقة</li>
-              </ul>
-              <a href="#members" class="btn btn-primary btn-sm">تعرّف على الممثلين</a>
-            </article>
-          </div>
+          <section class="level">
+            <h3 class="level-title"><span class="level-num">٣</span> أعضاء من الطلاب والطالبات</h3>
+            <div class="level-summary" id="levelStudents"></div>
+          </section>
         </div>
       </div>
     </section>
 
-    <!-- ===================== الأعضاء ===================== -->
-    <section class="section" id="members">
+    <!-- ===================== من يمثّلني؟ ===================== -->
+    <section class="section" id="represent">
+      <div class="container narrow">
+        <header class="section-head reveal">
+          <span class="eyebrow">أداة سريعة</span>
+          <h2>من يمثّلني في المجلس؟</h2>
+          <p>اكتب اسم كليتك، ونوصّلك بممثّليك مباشرة.</p>
+        </header>
+
+        <div class="finder reveal">
+          <label for="collegeInput">كليتك</label>
+          <div class="finder-field">
+            <input type="search" id="collegeInput" placeholder="مثال: كلية الصيدلة"
+                   autocomplete="off" role="combobox" aria-expanded="false"
+                   aria-controls="collegeOptions" aria-autocomplete="list">
+            <button type="button" class="finder-clear" id="collegeClear" aria-label="مسح" hidden>&times;</button>
+          </div>
+          <ul class="finder-options" id="collegeOptions" role="listbox" aria-label="الكليات" hidden></ul>
+          <p class="finder-hint" id="finderHint">اكتب أول حرفين من اسم كليتك لتظهر لك الخيارات.</p>
+        </div>
+
+        <div class="finder-results" id="finderResults" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ===================== دليل الممثلين ===================== -->
+    <section class="section section-alt" id="directory">
       <div class="container">
         <header class="section-head reveal">
-          <span class="eyebrow">ممثلو الطلبة</span>
-          <h2>تعرّف على ممثليك</h2>
-          <p>اختر كليتك ليظهر لك ممثلوك مباشرة، أو ابحث بالاسم.</p>
+          <div class="head-row">
+            <h2>دليل الممثلين</h2>
+            <span class="count-pill" id="directoryCount"></span>
+          </div>
+          <p>جميع ممثلي الطلبة مرتبين حسب فئة التمثيل.</p>
         </header>
 
-        <div class="filters" role="search">
-          <div class="field">
-            <label for="categoryFilter">كليتك</label>
-            <select id="categoryFilter">
-              <option value="">جميع الكليات</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="memberSearch">أو ابحث بالاسم</label>
-            <input type="search" id="memberSearch" placeholder="مثال: كلية الصيدلة" autocomplete="off">
-          </div>
-          <button type="button" class="btn btn-ghost" id="resetFilters">إعادة التعيين</button>
-        </div>
-
-        <p class="results-count" id="resultsCount" aria-live="polite"></p>
-
-        <div class="members-grid" id="membersGrid"></div>
-
-        <div class="empty-state" id="membersEmpty" hidden>
-          <p>لا توجد نتائج مطابقة لبحثك. جرّب كلمة أخرى أو اختر «جميع الكليات».</p>
-        </div>
+        <div class="directory reveal" id="directoryList"></div>
       </div>
     </section>
 
-    <!-- ===================== الاستبيانات ===================== -->
+    <!-- ===================== الاستطلاعات ===================== -->
     <section class="section" id="surveys">
-      <div class="container">
+      <div class="container narrow">
         <header class="section-head reveal">
           <span class="eyebrow">المشاركة الطلابية</span>
           <h2>صوتك يصنع الفرق</h2>
-          <p>شارك في الاستبيانات المفتوحة؛ فآراؤك تساعد المجلس على نقل صورة دقيقة عن احتياجات الطلبة.</p>
+          <p>اختر الاستطلاع لعرض تفاصيله والمشاركة فيه.</p>
         </header>
 
-        <div class="survey-tabs" role="group" aria-label="تصفية الاستبيانات">
-          <button type="button" class="tab is-active" data-status="all" aria-pressed="true">الكل</button>
-          <button type="button" class="tab" data-status="open" aria-pressed="false">المفتوحة</button>
-          <button type="button" class="tab" data-status="closed" aria-pressed="false">المغلقة</button>
-        </div>
-
-        <div class="surveys-grid" id="surveysGrid"></div>
+        <!-- شريط أفقي: كل استطلاع تبويب يحمل حالته -->
+        <div class="survey-strip" id="surveyStrip" role="tablist" aria-label="الاستطلاعات"></div>
+        <div class="survey-panel" id="surveyPanel"></div>
 
         <div class="empty-state" id="surveysEmpty" hidden>
-          <p>لا توجد استبيانات في هذا التصنيف حاليًا.</p>
+          <p>لا توجد استطلاعات منشورة حاليًا. تابع إعلانات المجلس قريبًا.</p>
         </div>
 
         <p class="privacy-note">
-          تُنقل عند المشاركة إلى نموذج خارجي (مثل Microsoft Forms أو Google Forms)، وتخضع إجاباتك لسياسة خصوصية
+          تُنقل عند المشاركة إلى نموذج خارجي (مثل Google Forms)، وتخضع إجاباتك لسياسة خصوصية
           الجهة المستضيفة للنموذج. هذا الموقع لا يجمع ولا يخزّن أي بيانات.
         </p>
       </div>
@@ -253,8 +256,9 @@
         <ul class="footer-links">
           <li><a href="#about">عن المجلس</a></li>
           <li><a href="#structure">التشكيل</a></li>
-          <li><a href="#members">الأعضاء</a></li>
-          <li><a href="#surveys">الاستبيانات</a></li>
+          <li><a href="#represent">من يمثّلني؟</a></li>
+          <li><a href="#directory">دليل الممثلين</a></li>
+          <li><a href="#surveys">الاستطلاعات</a></li>
         </ul>
       </div>
 
@@ -271,13 +275,30 @@
     </div>
   </footer>
 
-  <!-- نافذة الرسائل (تظهر مثلًا عند عدم توفر رابط الاستبيان) -->
+  <!-- نافذة تنبيه عامة -->
   <div class="modal" id="modal" hidden>
     <div class="modal-backdrop" data-close></div>
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <h3 id="modalTitle">تنبيه</h3>
       <p id="modalText"></p>
       <button type="button" class="btn btn-primary" data-close>حسنًا</button>
+    </div>
+  </div>
+
+  <!-- نافذة مراسلة الممثل -->
+  <div class="modal" id="contactModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-box modal-contact" role="dialog" aria-modal="true" aria-labelledby="cmName">
+      <button type="button" class="modal-x" data-close aria-label="إغلاق">&times;</button>
+      <div class="cm-avatar" id="cmAvatar" aria-hidden="true"></div>
+      <h3 id="cmName"></h3>
+      <p class="cm-role" id="cmRole"></p>
+      <div class="cm-email-row">
+        <code id="cmEmail"></code>
+        <button type="button" class="btn btn-ghost btn-sm" id="cmCopy">نسخ البريد</button>
+      </div>
+      <p class="cm-copied" id="cmCopied" role="status" aria-live="polite"></p>
+      <div class="cm-actions" id="cmActions"></div>
     </div>
   </div>
 

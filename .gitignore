@@ -1,0 +1,12 @@
+# إعدادات المحرر والأدوات المحلية
+.claude/
+.vscode/
+
+# ملفات نظام ويندوز وماك
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ملفات مؤقتة
+*.log
+*.tmp
