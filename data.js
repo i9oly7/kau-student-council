@@ -34,7 +34,7 @@ const LEADERSHIP = [
   { id: "kabli",  group: "chair",     position: "نائب رئيس الجامعة للشؤون التعليمية",          name: "د. محمد بن رضا كابلي",        photo: "images/leaders/kabli.jpg"  },
   { id: "fouad",  group: "secretary", position: "عميد شؤون الطلاب",                            name: "أ.د. فؤاد بن عبد العزيز أبو لبن", photo: "images/leaders/FOuad.jpg" },
   { id: "ghamdi", group: "leader",    position: "عميد عمادة القبول والتسجيل",                  name: "د.جمعان بن صالح الغامدي",      photo: "images/leaders/ghamdi.jpg" },
-  { id: "fatima", group: "leader",    position: "عميدة الدراسات العليا",                       name: "د. فاطمة بنت عمر عبد الله كامل", photo: "", avatar: "hijab" },
+  { id: "fatima", group: "leader",    position: "عميدة الدراسات العليا",                       name: "أ.د. فاطمة بنت عمر عبد الله كامل", photo: "", avatar: "hijab" },
   { id: "musab",  group: "leader",    position: "الرئيس التنفيذي للاتصال المؤسسي",             name: "د.مصعب بن فالح الحربي",       photo: "images/leaders/musab.jpg"  }
 ];
 /* ---------- فئات التمثيل والكليات التابعة لها ----------
