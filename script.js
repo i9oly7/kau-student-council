@@ -138,6 +138,21 @@ document.addEventListener("keydown", (e) => {
     const img = a.querySelector("img");
     if (img) img.addEventListener("error", () => img.remove(), { once: true });
   });
+
+  /* تصغير خط الاسم عند الحاجة ليبقى في سطر واحد مهما ضاقت الشاشة */
+  function fitNames() {
+    document.querySelectorAll(".levels .person h4").forEach((h) => {
+      h.style.fontSize = "";
+      let size = parseFloat(getComputedStyle(h).fontSize);
+      while (h.scrollWidth > h.clientWidth && size > 9) {
+        size -= 0.5;
+        h.style.fontSize = size + "px";
+      }
+    });
+  }
+  fitNames();
+  window.addEventListener("resize", fitNames);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitNames);
 })();
 
 /* ---------- أداة «من يمثّلني؟» ---------- */
