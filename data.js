@@ -32,10 +32,9 @@ const COUNCIL_INFO = {
 */
 const LEADERSHIP = [
   { id: "kabli",  group: "chair",     position: "نائب رئيس الجامعة للشؤون التعليمية",          name: "د. محمد بن رضا كابلي",        photo: "images/leaders/kabli.jpg"  },
-  { id: "fouad",  group: "secretary", position: "عميد شؤون الطلاب",                            name: "أ.د. فؤاد بن عبد العزيز أبو لبن", photo: "images/leaders/FOuad.jpg" },
-  { id: "omody",  group: "leader",    position: "نائب رئيس الجامعة للحياة الجامعية والتشغيل", name: "د. محمد بن أحمد العمودي",      photo: "images/leaders/omody.jpg"  },
+  { id: "fouad",  group: "secretary", position: "عميد شؤون الطلاب",                            name: "أ.د. فؤاد بن عبد العزيز أبو لبن", photo: "images/leaders/FOuad.jpg" },
   { id: "ghamdi", group: "leader",    position: "عميد عمادة القبول والتسجيل",                  name: "د.جمعان بن صالح الغامدي",      photo: "images/leaders/ghamdi.jpg" },
-  { id: "sulami", group: "leader",    position: "وكيل عمادة الدراسات العليا",                  name: "د.عبدالوهاب بن مستور السلمي",  photo: "images/leaders/sulami.png" },
+  { id: "fatima", group: "leader",    position: "عميدة الدراسات العليا",                       name: "د. فاطمة بنت عمر عبد الله كامل", photo: "", avatar: "hijab" },
   { id: "musab",  group: "leader",    position: "الرئيس التنفيذي للاتصال المؤسسي",             name: "د.مصعب بن فالح الحربي",       photo: "images/leaders/musab.jpg"  }
 ];
 /* ---------- فئات التمثيل والكليات التابعة لها ----------
